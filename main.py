@@ -19,8 +19,8 @@ console = Console()
 @click.option(
     "--mfip",
     help=console.print(
-        "[bold magenta]Most frequent IP[/bold magenta].",
-        "\nUse: main.py mfil <input file/dir> <output file>",
+        "[bold magenta]Most frequent IP.[/bold magenta]",
+        "\nUse: python main.py mfil <input file/dir> <output file>",
     ),
     metavar="",
 )
@@ -37,7 +37,7 @@ def mfip(mfip, input, output):
     "--lfip",
     help=console.print(
         "[bold magenta]Least frequent IP.[bold magenta]",
-        "\nUse: main.py lfip <input file/dir> <output file>",
+        "\nUse: python main.py lfip <input file/dir> <output file>",
     ),
     metavar="",
 )
@@ -54,7 +54,7 @@ def lfip(lfip, input, output):
     "--eps",
     help=console.print(
         "[bold magenta]Events per second.[bold magenta]",
-        "\nUse: main.py eps <input file/dir> <output file>",
+        "\nUse: python main.py eps <input file/dir> <output file>",
     ),
     metavar="",
 )
@@ -71,7 +71,7 @@ def eps(eps, input, output):
     "--bytes",
     help=console.print(
         "[bold magenta]Total amount of bytes exchanged.[bold magenta]",
-        "\nUse: main.py bytes <input file/dir> <output file>",
+        "\nUse: python main.py bytes <input file/dir> <output file>",
     ),
     metavar="",
 )
