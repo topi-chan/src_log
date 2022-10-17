@@ -91,3 +91,4 @@ def bytes(bytes, input, output):
 
 if __name__ == "__main__":
     analyze_logs()
+
