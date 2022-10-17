@@ -1,70 +1,51 @@
-import pandas as pd
+#!/usr/bin/python
 
-from json import dump
+import click
 
-
-# Input
-
-def take_input_data(path: str) -> pd.DataFrame:
-
-    file = pd.read_csv(
-        path,
-        on_bad_lines="skip",
-        sep=" ",
-        skipinitialspace=True,
-        names=[
-            "Timestamp in seconds since the epoch",
-            "Response header size in bytes",
-            "Client IP address",
-            "HTTP response code",
-            "Response size in bytes",
-            "HTTP request method",
-            "URL",
-            "Username",
-            "Type of access/destination IP address",
-            "Response type",
-        ],
-    )
-    df = pd.DataFrame(data=file)
-    return df
+from data_io import save_results, take_input_data
+from operations import bytes_total, e_ps, lf_ip, mf_ip
 
 
-df = take_input_data("access.log")
-print(df.head(n=1000))
-print(df.columns[1:4])
+@click.group()
+def analyse():
+    pass
 
 
-# Operations
-def mf_ip(ip_df_col: pd.DataFrame) -> str:
-    return ip_df_col.mode()[0]
+@analyse.command(name="mfip")
+@click.option("--mfip", help="Most frequent IP")
+@click.argument("input")
+def mfip(mfip, input):
+    df = take_input_data(input)
+    mf = mf_ip(df)
+    save_results("Most frequent IP", mf)
 
 
-def lf_ip(ip_df_col: pd.DataFrame) -> str:
-    return ip_df_col.value_counts().idxmin()
+@analyse.command(name="lfip")
+@click.option("--lfip", help="Least frequent IP")
+@click.argument("input")
+def lfip(lfip, input):
+    df = take_input_data(input)
+    lf = lf_ip(df)
+    save_results("Least frequent IP", lf)
 
 
-# 'since the epoch' - ale względem czasu pobrania, generowania logów? a jaki on był? średnio 2011 epochconverter.com
-def e_ps(e_df_col: pd.DataFrame) -> float:
-    return e_df_col.mean()
+@analyse.command(name="eps")
+@click.option("--eps", help="Events per second")
+@click.argument("input")
+def eps(eps, input):
+    df = take_input_data(input)
+    eps = e_ps(df)
+    save_results("Events per second", eps)
 
 
-def bytes_total(bytes_df_col: pd.DataFrame) -> int:
-    return bytes_df_col.sum()
+@analyse.command(name="bytes")
+@click.option("--bytes", help="Total amount of bytes exchanged")
+@click.argument("input")
+def bytes(bytes, input):
+    df = take_input_data(input)
+    bytes = bytes_total(df)
+    save_results("Total amount of bytes exchanged", bytes)
 
 
-# Output
-def save_results(col_name: str, result: str | int | float, path: str = "result.json"):
-    json_dict = {f"{col_name}": f"{result}"}
-    with open(path, "w") as fp:
-        dump(json_dict, fp, indent=4)
-
-
-print(mf_ip(df["Client IP address"]))
-print(lf_ip(df["Client IP address"]))
-print(e_ps(df["Timestamp in seconds since the epoch"]))
-#print(bytes_total(df["Response size in bytes"]))
-
-res1 = bytes_total(df["Response size in bytes"])
-
-save_results("Response size in bytes", res1)
-#save_results(bytes_total(df["Response size in bytes"]))
+if __name__ == "__main__":
+    analyse()
