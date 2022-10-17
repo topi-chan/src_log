@@ -1,18 +1,29 @@
 #!/usr/bin/python
 
 import click
+from rich.console import Console
 
 from data_io import save_results, take_input_data
 from operations import bytes_total, e_ps, lf_ip, mf_ip
 
 
 @click.group()
-def analyse():
+def analyze_logs():
     pass
 
 
-@analyse.command(name="mfip")
-@click.option("--mfip", help="Most frequent IP")
+console = Console()
+
+
+@analyze_logs.command(name="mfip")
+@click.option(
+    "--mfip",
+    help=console.print(
+        "[bold magenta]Most frequent IP[/bold magenta].",
+        "\nUse: main.py mfil <input file/dir> <output file>",
+    ),
+    metavar="",
+)
 @click.argument("input")
 @click.argument("output")
 def mfip(mfip, input, output):
@@ -21,8 +32,15 @@ def mfip(mfip, input, output):
     save_results("Most frequent IP", mf, output)
 
 
-@analyse.command(name="lfip")
-@click.option("--lfip", help="Least frequent IP")
+@analyze_logs.command(name="lfip")
+@click.option(
+    "--lfip",
+    help=console.print(
+        "[bold magenta]Least frequent IP.[bold magenta]",
+        "\nUse: main.py lfip <input file/dir> <output file>",
+    ),
+    metavar="",
+)
 @click.argument("input")
 @click.argument("output")
 def lfip(lfip, input, output):
@@ -31,8 +49,15 @@ def lfip(lfip, input, output):
     save_results("Least frequent IP", lf, output)
 
 
-@analyse.command(name="eps")
-@click.option("--eps", help="Events per second")
+@analyze_logs.command(name="eps")
+@click.option(
+    "--eps",
+    help=console.print(
+        "[bold magenta]Events per second.[bold magenta]",
+        "\nUse: main.py eps <input file/dir> <output file>",
+    ),
+    metavar="",
+)
 @click.argument("input")
 @click.argument("output")
 def eps(eps, input, output):
@@ -41,8 +66,15 @@ def eps(eps, input, output):
     save_results("Events per second", eps, output)
 
 
-@analyse.command(name="bytes")
-@click.option("--bytes", help="Total amount of bytes exchanged")
+@analyze_logs.command(name="bytes")
+@click.option(
+    "--bytes",
+    help=console.print(
+        "[bold magenta]Total amount of bytes exchanged.[bold magenta]",
+        "\nUse: main.py bytes <input file/dir> <output file>",
+    ),
+    metavar="",
+)
 @click.argument("input")
 @click.argument("output")
 def bytes(bytes, input, output):
@@ -52,4 +84,4 @@ def bytes(bytes, input, output):
 
 
 if __name__ == "__main__":
-    analyse()
+    analyze_logs()
