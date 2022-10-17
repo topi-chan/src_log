@@ -6,13 +6,19 @@ from rich.console import Console
 from data_io import save_results, take_input_data
 from operations import bytes_total, e_ps, lf_ip, mf_ip
 
+console = Console()
+
 
 @click.group()
 def analyze_logs():
     pass
 
 
-console = Console()
+console.print(
+    """Hi :vampire:\n[b][i]This is a console log analyzer program[/i]\nIs has four operations.
+    \nIt takes an operation type argument, then location of file or a directory with logs, then directory to save result
+    \nTo use it run a command for a operation as specified below."""
+)
 
 
 @analyze_logs.command(name="mfip")
@@ -20,7 +26,7 @@ console = Console()
     "--mfip",
     help=console.print(
         "[bold magenta]Most frequent IP.[/bold magenta]",
-        "\nUse: python main.py mfil <input file/dir> <output file>",
+        "\nUse: [b]python main.py mfil[b] <input_file/dir> <output_file>",
     ),
     metavar="",
 )
@@ -37,7 +43,7 @@ def mfip(mfip, input, output):
     "--lfip",
     help=console.print(
         "[bold magenta]Least frequent IP.[bold magenta]",
-        "\nUse: python main.py lfip <input file/dir> <output file>",
+        "\nUse: [b]python main.py lfip[b] <input_file/dir> <output_file>",
     ),
     metavar="",
 )
@@ -54,7 +60,7 @@ def lfip(lfip, input, output):
     "--eps",
     help=console.print(
         "[bold magenta]Events per second.[bold magenta]",
-        "\nUse: python main.py eps <input file/dir> <output file>",
+        "\nUse: [b]python main.py eps[b] <input_file/dir> <output_file>",
     ),
     metavar="",
 )
@@ -71,7 +77,7 @@ def eps(eps, input, output):
     "--bytes",
     help=console.print(
         "[bold magenta]Total amount of bytes exchanged.[bold magenta]",
-        "\nUse: python main.py bytes <input file/dir> <output file>",
+        "\nUse: [b]python main.py bytes[b] <input_file/dir> <output_file>",
     ),
     metavar="",
 )
