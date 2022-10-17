@@ -14,37 +14,41 @@ def analyse():
 @analyse.command(name="mfip")
 @click.option("--mfip", help="Most frequent IP")
 @click.argument("input")
-def mfip(mfip, input):
+@click.argument("output")
+def mfip(mfip, input, output):
     df = take_input_data(input)
     mf = mf_ip(df)
-    save_results("Most frequent IP", mf)
+    save_results("Most frequent IP", mf, output)
 
 
 @analyse.command(name="lfip")
 @click.option("--lfip", help="Least frequent IP")
 @click.argument("input")
-def lfip(lfip, input):
+@click.argument("output")
+def lfip(lfip, input, output):
     df = take_input_data(input)
     lf = lf_ip(df)
-    save_results("Least frequent IP", lf)
+    save_results("Least frequent IP", lf, output)
 
 
 @analyse.command(name="eps")
 @click.option("--eps", help="Events per second")
 @click.argument("input")
-def eps(eps, input):
+@click.argument("output")
+def eps(eps, input, output):
     df = take_input_data(input)
     eps = e_ps(df)
-    save_results("Events per second", eps)
+    save_results("Events per second", eps, output)
 
 
 @analyse.command(name="bytes")
 @click.option("--bytes", help="Total amount of bytes exchanged")
 @click.argument("input")
-def bytes(bytes, input):
+@click.argument("output")
+def bytes(bytes, input, output):
     df = take_input_data(input)
     bytes = bytes_total(df)
-    save_results("Total amount of bytes exchanged", bytes)
+    save_results("Total amount of bytes exchanged", bytes, output)
 
 
 if __name__ == "__main__":
