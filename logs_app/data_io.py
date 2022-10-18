@@ -48,9 +48,27 @@ def load_input_data(path: str) -> pd.DataFrame:
                         names=PD_COLUMN_NAMES,
                     )
                 )
-        df_data = pd.concat(df_list)  # Combine dataframes into one
-    else:  # Return an error if neither plain text file nor directory is provided
-        raise TypeError("You have to provide a plain text file or a directory.")
+        if filelist:
+            df_data = pd.concat(df_list)  # Combine dataframes into one
+        else:  # If filelist was empty try to create a single dataframe
+            df_data = pd.read_table(
+                path,
+                on_bad_lines="skip",
+                sep=" ",
+                skipinitialspace=True,
+                names=PD_COLUMN_NAMES,
+            )
+    else:  # Last try, if datatype not detected
+        try:
+            df_data = pd.read_table(
+                path,
+                on_bad_lines="skip",
+                sep=" ",
+                skipinitialspace=True,
+                names=PD_COLUMN_NAMES,
+            )  # Return an error if neither plain text file nor directory is provided and file can't be processed
+        except Exception as e:
+            raise TypeError(f"You have to provide a plain text file or a directory. Log error:{e}")
     df = pd.DataFrame(data=df_data)
     return df  # Return a dataframe either from single text file or block of text files
 
