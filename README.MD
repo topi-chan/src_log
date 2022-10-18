@@ -13,14 +13,14 @@ and saves result in pointed file in json format as: {type of analysis: result}.
 Input file/files should be of plain-text type and output file of json type
 
 ## Docker
-- Install: $ docker build -t <container_name> .
+- Install (execute in directory with dockerfile): $ docker build -t <container_name> .
 
 - Run: $ docker run <container_name> <additional_commands> (e.g. --help)
 - Run with passing log file (sample directory from PyCharm standard; container name: test_log): $ docker run -it -v /Users/username/PycharmProjects/src_log/access.log:/data/access.log test_log mfip /data/access.log result.json
 
     or
-- docker run -it --mount src=/Users/username/PycharmProjects/src_log/logs_app/access.log,target=/access.log,type=bind test_log mfip access.log result.json
-- Copy results from container to local:  docker cp test_log:/result.json  /Users/username/PycharmProjects/src_log/logs_app/result.json
+- $ docker run -it --mount src=/Users/username/PycharmProjects/src_log/logs_app/access.log,target=/access.log,type=bind test_log mfip access.log result.json
+- Copy results from container to local: $ docker cp test_log:/result.json  /Users/username/PycharmProjects/src_log/logs_app/result.json
 
 
 ## Additional comments
