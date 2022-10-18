@@ -5,8 +5,22 @@ from json import dump
 import pandas as pd
 
 
+PD_COLUMN_NAMES = [
+    "Timestamp in seconds since the epoch",
+    "Response header size in bytes",
+    "Client IP address",
+    "HTTP response code",
+    "Response size in bytes",
+    "HTTP request method",
+    "URL",
+    "Username",
+    "Type of access/destination IP address",
+    "Response type",
+]
+
+
 # Input
-def take_input_data(path: str) -> pd.DataFrame:
+def load_input_data(path: str) -> pd.DataFrame:
     if (
         mimetypes.guess_type(path)[0] == "text/plain"
     ):  # If it's a single file with text type use this block to simply load a df
@@ -15,18 +29,7 @@ def take_input_data(path: str) -> pd.DataFrame:
             on_bad_lines="skip",
             sep=" ",
             skipinitialspace=True,
-            names=[
-                "Timestamp in seconds since the epoch",
-                "Response header size in bytes",
-                "Client IP address",
-                "HTTP response code",
-                "Response size in bytes",
-                "HTTP request method",
-                "URL",
-                "Username",
-                "Type of access/destination IP address",
-                "Response type",
-            ],
+            names=PD_COLUMN_NAMES,
         )
     elif os.path.isdir(path):  # If it's a directory execute this block
         df_list = []  # Create an empty list of dataframes
@@ -42,18 +45,7 @@ def take_input_data(path: str) -> pd.DataFrame:
                         on_bad_lines="skip",
                         sep=" ",
                         skipinitialspace=True,
-                        names=[
-                            "Timestamp in seconds since the epoch",
-                            "Response header size in bytes",
-                            "Client IP address",
-                            "HTTP response code",
-                            "Response size in bytes",
-                            "HTTP request method",
-                            "URL",
-                            "Username",
-                            "Type of access/destination IP address",
-                            "Response type",
-                        ],
+                        names=PD_COLUMN_NAMES,
                     )
                 )
         df_data = pd.concat(df_list)  # Combine dataframes into one
@@ -65,6 +57,6 @@ def take_input_data(path: str) -> pd.DataFrame:
 
 # Output
 def save_results(col_name: str, result: str | int | float, path: str) -> None:
-    json_dict = {f"{col_name}": f"{result}"}
+    json_dict = {f"{col_name}": f"{result}"}  # Create dictionary with analysis result
     with open(path, "w") as fp:
-        dump(json_dict, fp)
+        dump(json_dict, fp)  # Save dict as json file

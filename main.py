@@ -3,7 +3,7 @@
 import click
 from rich.console import Console
 
-from data_io import save_results, take_input_data
+from data_io import save_results, load_input_data
 from operations import bytes_total, e_ps, lf_ip, mf_ip
 
 console = Console()
@@ -33,7 +33,7 @@ console.print(
 @click.argument("input")
 @click.argument("output")
 def mfip(mfip, input, output):
-    df = take_input_data(input)
+    df = load_input_data(input)
     mf = mf_ip(df)
     save_results("Most frequent IP", mf, output)
 
@@ -50,7 +50,7 @@ def mfip(mfip, input, output):
 @click.argument("input")
 @click.argument("output")
 def lfip(lfip, input, output):
-    df = take_input_data(input)
+    df = load_input_data(input)
     lf = lf_ip(df)
     save_results("Least frequent IP", lf, output)
 
@@ -67,7 +67,7 @@ def lfip(lfip, input, output):
 @click.argument("input")
 @click.argument("output")
 def eps(eps, input, output):
-    df = take_input_data(input)
+    df = load_input_data(input)
     eps = e_ps(df)
     save_results("Events per second", eps, output)
 
@@ -84,7 +84,7 @@ def eps(eps, input, output):
 @click.argument("input")
 @click.argument("output")
 def bytes(bytes, input, output):
-    df = take_input_data(input)
+    df = load_input_data(input)
     bytes = bytes_total(df)
     save_results("Total amount of bytes exchanged", bytes, output)
 
