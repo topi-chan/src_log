@@ -1,5 +1,6 @@
 ## App
-###For help run: python main.py --help
+
+### For help run: python main.py --help
 
 Help shows all use cases of the app. In brief, it analyze provided log file for:
 - Most frequent IP
