@@ -39,7 +39,7 @@ def mfip(mfip, input, output):
     mf = mf_ip(df)
     save_results("Most frequent IP", mf, output)
     console.print(
-        f"\n\ni][b][bold magenta]Most frequent IP determined and saved in: {output}.[/bold magenta][b][i]")
+        f"\n\n[i][b][bold magenta]Most frequent IP determined and saved in: {output}.[/bold magenta][b][i]")
 
 
 @analyze_logs.command(name="lfip")
