@@ -23,7 +23,7 @@ PD_COLUMN_NAMES = [
 def load_input_data(path: str) -> pd.DataFrame:
     if (
         mimetypes.guess_type(path)[0] == "text/plain"
-    ):  # If it's a single file with text type use this block to simply load a df
+    ):  # If it's a single file with detectable text type use this block to simply load a df
         df_data = pd.read_table(
             path,
             on_bad_lines="skip",
@@ -35,10 +35,7 @@ def load_input_data(path: str) -> pd.DataFrame:
         df_list = []  # Create an empty list of dataframes
         filelist = os.listdir(path)  # Make a list of files in the directory
         for file in filelist:  # Iterate through the file list
-            if (
-                mimetypes.guess_type(file)[0]
-                == "text/plain"  # Check if file is of type 'text'
-            ):
+            try:  # Try-except in case there are mixed type files in directory, e.g. binary
                 df_list.append(  # Try to add a dataframe from file to a list
                     pd.read_table(
                         f"{path}/{file}",  # Make a filepath to specific file from base path + filename
@@ -48,6 +45,9 @@ def load_input_data(path: str) -> pd.DataFrame:
                         names=PD_COLUMN_NAMES,
                     )
                 )
+            except Exception as e:
+                print(f"Can not handle file. Log error: {e}")
+                continue
         if filelist:
             df_data = pd.concat(df_list)  # Combine dataframes into one
         else:  # If filelist was empty try to create a single dataframe
