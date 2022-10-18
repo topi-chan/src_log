@@ -2,11 +2,11 @@
 
 ### For help run: python main.py --help
 
-Help shows all use cases of the app. In brief, it analyze provided log file for:
-- Most frequent IP
-- Least frequent IP
-- Events per second
-- Total amount of bytes exchanged
+Help shows all use cases of the app. In brief, it analyze provided log file for (commands in parentheses):
+- Most frequent IP (mfip)
+- Least frequent IP (lfip)
+- Events per second (eps)
+- Total amount of bytes exchanged (bytes)
 
 and saves result in pointed file in json format as: {type of analysis: result}.
 
