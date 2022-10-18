@@ -47,7 +47,7 @@ def load_input_data(path: str) -> pd.DataFrame:
                     )
                 )
             except Exception as e:  # Print why type can't be processed and continue iteration
-                print(f"Can not handle file. Log error: {e}")
+                print(f"Can not handle file. Error log: {e}")
                 continue
         if filelist:
             df_data = pd.concat(df_list)  # Combine dataframes into one
@@ -59,7 +59,7 @@ def load_input_data(path: str) -> pd.DataFrame:
         # Return an error if neither plain text file nor directory is provided and there's no file that can be processed
         except Exception as e:
             raise TypeError(
-                f"You have to provide a plain text file or a directory. Log error:{e}"
+                f"You have to provide a plain text file or a directory. Error log: {e}"
             )
     df = pd.DataFrame(data=df_data)
     return df  # Return a dataframe either from single text file or block of text files
