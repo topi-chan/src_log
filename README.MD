@@ -10,6 +10,8 @@ Help shows all use cases of the app. In brief, it analyze provided log file for:
 
 and saves result in pointed file in json format as: {type of analysis: result}.
 
+Input file/files should be of plain-text type and output file of json type
+
 ## Docker
 - Install: $ docker build -t <container_name> .
 

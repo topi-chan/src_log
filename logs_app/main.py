@@ -16,7 +16,8 @@ if sys.argv[1] == "--help":
     console.print(
         """Hi :vampire:\n[b][i]This is a console log analyzer program[/i]\nIs has four operations.
         \nIt takes an operation type argument, then location of file or a directory with logs, then directory to save result
-        \nTo use it run a command for a operation as specified below."""
+        \nTo use it run a command for a operation as specified below
+        \nInput file/files should be of plain-text type and output file of json type.\n"""
     )
 
 
