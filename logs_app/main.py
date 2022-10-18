@@ -1,7 +1,9 @@
 #!/usr/bin/python
 import sys
+from time import sleep
 
 import click
+import pandas as pd
 from rich.console import Console
 
 from data_io import load_input_data, save_results
@@ -16,6 +18,17 @@ if sys.argv[1] == "--help":
         \nIt takes an operation type argument, then location of file or a directory with logs, then directory to save result
         \nTo use it run a command for a operation as specified below."""
     )
+
+
+def base_task(input: str) -> pd.DataFrame:
+    tasks = ["read file", "prepare file", "analyze and save file"]
+    with console.status("[bold green]Working on tasks..."):
+        while tasks:
+            task = tasks.pop(0)
+            sleep(1)
+            console.log(f"{task}")
+    df = load_input_data(input)
+    return df
 
 
 @click.group()
@@ -35,11 +48,12 @@ def analyze_logs():
 @click.argument("input")
 @click.argument("output")
 def mfip(mfip, input, output):
-    df = load_input_data(input)
+    df = base_task(input)
     mf = mf_ip(df)
     save_results("Most frequent IP", mf, output)
     console.print(
-        f"\n\n[i][b][bold magenta]Most frequent IP determined and saved in: {output}.[/bold magenta][b][i]")
+        f"\n\n[i][b][bold magenta]Most frequent IP determined and saved in: {output}.[/bold magenta][b][i]"
+    )
 
 
 @analyze_logs.command(name="lfip")
@@ -54,11 +68,12 @@ def mfip(mfip, input, output):
 @click.argument("input")
 @click.argument("output")
 def lfip(lfip, input, output):
-    df = load_input_data(input)
+    df = base_task(input)
     lf = lf_ip(df)
     save_results("Least frequent IP", lf, output)
     console.print(
-        f"\n\n[i][b][bold magenta]Least frequent IP determined and saved in: {output}.[/bold magenta][b][i]")
+        f"\n\n[i][b][bold magenta]Least frequent IP determined and saved in: {output}.[/bold magenta][b][i]"
+    )
 
 
 @analyze_logs.command(name="eps")
@@ -73,11 +88,12 @@ def lfip(lfip, input, output):
 @click.argument("input")
 @click.argument("output")
 def eps(eps, input, output):
-    df = load_input_data(input)
+    df = base_task(input)
     eps = e_ps(df)
     save_results("Events per second", eps, output)
     console.print(
-        f"\n\n[i][b][bold magenta]Events per second counted and saved in: {output}.[/bold magenta][b][i]")
+        f"\n\n[i][b][bold magenta]Events per second counted and saved in: {output}.[/bold magenta][b][i]"
+    )
 
 
 @analyze_logs.command(name="bytes")
@@ -92,11 +108,12 @@ def eps(eps, input, output):
 @click.argument("input")
 @click.argument("output")
 def bytes(bytes, input, output):
-    df = load_input_data(input)
+    df = base_task(input)
     bytes = bytes_total(df)
     save_results("Total amount of bytes exchanged", bytes, output)
     console.print(
-        f"\n\n[i][b][bold magenta]Total amount of bytes exchanged counted and saved in: {output}.[/bold magenta][b][i]")
+        f"\n\n[i][b][bold magenta]Total amount of bytes exchanged counted and saved in: {output}.[/bold magenta][b][i]"
+    )
 
 
 if __name__ == "__main__":
