@@ -7,6 +7,7 @@ Help shows all use cases of the app. In brief, it analyze provided log file for:
 - Least frequent IP
 - Events per second
 - Total amount of bytes exchanged
+
 and saves result in pointed file in json format as: {type of analysis: result}.
 
 ## Docker
