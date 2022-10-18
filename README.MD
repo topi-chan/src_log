@@ -15,7 +15,7 @@ Input file/files should be of plain-text type and output file of json type
 ## Docker
 - Install: $ docker build -t <container_name> .
 
-- Run: $ docker run <container_name> <additional_commands>
+- Run: $ docker run <container_name> <additional_commands> (e.g. --help)
 - Run with passing log file (sample directory from PyCharm standard; container name: test_log): $ docker run -it -v /Users/username/PycharmProjects/src_log/access.log:/data/access.log test_log mfip /data/access.log result.json
 
     or
