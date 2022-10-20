@@ -51,4 +51,3 @@ def test_bytes_total():
 def test_base_task():
     base_task_df = base_task("log_test.txt")
     assert base_task_df is not None
-

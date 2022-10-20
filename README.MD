@@ -38,6 +38,7 @@ https://docs.python.org/3/library/venv.html
 
 
 ## Additional comments
+- Run pytest from src_log/logs_app level.
 - We assume number of rows to analyze is less than 10 million. For larger files it might be better to use python generators as a method for data acquisition instead of pure pandas (to not overload workspace resources, mainly memory used).
 - Docker provides python main.py command from entrypoint.
 - Code was formatted according to Black and Isort libraries standard.
