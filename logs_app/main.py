@@ -12,6 +12,7 @@ from operations import bytes_total, e_ps, lf_ip, mf_ip
 console = Console()
 
 
+# Show full help message if --help is used
 if sys.argv[1] == "--help":
     console.print(
         """Hi :vampire:\n[b][i]This is a console log analyzer program[/i]\nIs has four operations.
@@ -21,6 +22,7 @@ if sys.argv[1] == "--help":
     )
 
 
+# Load data from file and display console message
 def base_task(input: str) -> pd.DataFrame:
     tasks = ["read file", "prepare file", "analyze and save file"]
     with console.status("[bold green]Working on tasks..."):
@@ -32,6 +34,7 @@ def base_task(input: str) -> pd.DataFrame:
     return df
 
 
+# Execution of each command: 1/load data (logic from data_io module) 2/analyze it (operations module) 3/ save (data_io)
 @click.group()
 def analyze_logs():
     pass

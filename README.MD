@@ -12,6 +12,12 @@ and saves result in pointed file in json format as: {type of analysis: result}.
 
 Input file/files should be of plain-text type and output file of json type
 
+For running program locally without Docker: 
+- Create venv: $ python3 venv /venv/
+- Activate venv: venv/bin/activate or if permission denied: $ . venv/bin/activate
+- To run program activate venv and run, from logs_app directory: $ python main.py --help
+- To deactivate env: $ deactivate
+
 ## Docker
 - Install (execute in directory with dockerfile): $ docker build -t <container_name> .
 
