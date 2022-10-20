@@ -58,7 +58,7 @@ def load_input_data(path: str) -> pd.DataFrame:
     else:
         try:  # Last try, if datatype not detected
             df_data = read_table(path)
-            console.print("[red][b]File was loaded but it's type not identified correctly[red][b]")
+            console.print("[red][b]File was loaded but its type not identified correctly[red][b]")
         # Return an error if neither plain text file nor directory is provided and there's no file that can be processed
         except Exception as e:
             raise TypeError(
