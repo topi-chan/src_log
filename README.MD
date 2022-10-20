@@ -15,7 +15,7 @@ Input file/files should be of plain-text type and output file of json type
 For running program locally without Docker: 
 https://docs.python.org/3/library/venv.html
 - Create venv: $ python3 venv /venv/
-- Activate venv: venv/bin/activate or if permission denied: $ . venv/bin/activate
+- Activate venv: $ venv/bin/activate or if permission denied: $ . venv/bin/activate
 - To run program activate venv and run, from logs_app directory: $ python main.py --help
 - To deactivate env: $ deactivate
 
@@ -30,7 +30,7 @@ https://docs.python.org/3/library/venv.html
 
   To save on a container and then copy on local:
 
-- $ docker run -it -v /Users/username/PycharmProjects/src_log/access.log:/data/access.log test_log mfip /data/access.log result.json
+- $ docker run -it -v /Users/username/PycharmProjects/src_log/access.log:/access.log test_log mfip access.log result.json
 
     or
 - $ docker run -it --mount src=/Users/username/PycharmProjects/src_log/logs_app/access.log,target=/access.log,type=bind test_log mfip access.log result.json
