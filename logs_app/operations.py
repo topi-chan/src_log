@@ -15,7 +15,7 @@ def lf_ip(ip_df: pd.DataFrame) -> str:
 # Return events per seconds
 def e_ps(e_df: pd.DataFrame) -> float:
     e_df["date"] = pd.to_datetime(
-        e_df["Timestamp in seconds since the epoch"], unit="s"  # Convert unix time into datetime
+        e_df["Timestamp in seconds since the epoch"], unit="ms"  # Convert unix time into datetime
     )
     min_unix_time_value = e_df["date"].value_counts().idxmin()  # Return first event
     max_unix_time_value = e_df["date"].mode()[0]  # Return last event
