@@ -6,8 +6,8 @@ import click
 import pandas as pd
 from rich.console import Console
 
-from data_io import load_input_data, save_results
-from operations import bytes_total, e_ps, lf_ip, mf_ip
+from logs_app.modules.data_io import load_input_data, save_results
+from logs_app.modules.operations import bytes_total, e_ps, lf_ip, mf_ip
 
 console = Console()
 
