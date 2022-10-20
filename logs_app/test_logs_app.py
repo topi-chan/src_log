@@ -1,8 +1,9 @@
 import pandas as pd
-from logs_app.modules.data_io import read_table, PD_COLUMN_NAMES
-from logs_app.modules.operations import mf_ip, lf_ip, e_ps, bytes_total
-from logs_app.main import base_task, mfip
+from logs_app.data_io import read_table, PD_COLUMN_NAMES
+from logs_app.operations import mf_ip, lf_ip, e_ps, bytes_total
+from .main import mfip, base_task
 import numpy
+
 
 def test_read_data():
     test_df = read_table("log_test.txt")

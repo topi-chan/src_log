@@ -1,19 +1,26 @@
 #!/usr/bin/python
+
+import os
 import sys
+
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.dirname(SCRIPT_DIR))
+
 from time import sleep
 
 import click
 import pandas as pd
 from rich.console import Console
 
-from logs_app.modules.data_io import load_input_data, save_results
-from logs_app.modules.operations import bytes_total, e_ps, lf_ip, mf_ip
+from logs_app.data_io import load_input_data, save_results
+from logs_app.operations import bytes_total, e_ps, lf_ip, mf_ip
+
 
 console = Console()
 
 
 # Show full help message if --help is used
-if sys.argv[1] == "--help":
+if __name__ == "__main__" and sys.argv[1] == "--help":
     console.print(
         """Hi :vampire:\n[b][i]This is a console log analyzer program[/i]\nIs has four operations.
         \nIt takes an operation type argument, then location of file or a directory with logs, then directory to save result
