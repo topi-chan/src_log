@@ -16,6 +16,7 @@ For running program locally without Docker:
 https://docs.python.org/3/library/venv.html
 - Create venv: $ python3 venv /venv/
 - Activate venv: $ venv/bin/activate or if permission denied: $ . venv/bin/activate
+- Install libraries: pip install -r requirements.txt
 - To run program activate venv and run, from logs_app directory: $ python main.py --help
 - To deactivate env: $ deactivate
 
