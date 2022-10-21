@@ -18,11 +18,13 @@ from logs_app.operations import bytes_total, e_ps, lf_ip, mf_ip
 
 console = Console()
 
-if len(sys.argv) > 1:
-    pass
-else:
-    console.print("[red]You have to add an argument, type python main.py --help for instructions.[red]")
-    quit()
+# Helper block in case of someone opening the app without any argument, such --help or actual command
+if __name__ == "__main__":
+    if len(sys.argv) > 1:
+        pass
+    else:
+        console.print("[red]You have to add an argument, type python main.py --help for instructions.[red]")
+        quit()
 
 # Show full help message if --help is used
 if __name__ == "__main__" and sys.argv[1] == "--help":
