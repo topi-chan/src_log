@@ -1,8 +1,12 @@
 import pandas as pd
-from logs_app.data_io import read_table, PD_COLUMN_NAMES
+from logs_app.data_io import read_table, PD_COLUMN_NAMES, save_results
 from logs_app.operations import mf_ip, lf_ip, e_ps, bytes_total
 from .main import mfip, base_task
 import numpy
+from unittest.mock import patch
+import sys
+import unittest
+import pytest
 
 
 def test_read_data():
@@ -51,3 +55,40 @@ def test_bytes_total():
 def test_base_task():
     base_task_df = base_task("log_test.txt")
     assert base_task_df is not None
+
+# old_sys_argv = sys.argv
+# sys.argv = [old_sys_argv[0]] + args
+# try:
+#     return parser.parse_args()
+# finally:
+#     sys.argv = old_sys_argv
+
+
+def test_save_results():
+    json_result = save_results("Test Col", env.analyze_result_eps, "path")
+    assert json_result is None
+
+
+@pytest.hookimpl(hookwrapper=True)
+def test_mfip(capsys):
+    fake_args = ["mfip", "log_test.txt", "result.json"]
+    with patch('sys.argv', fake_args):
+        result = mfip()
+        captured = capsys.readouterr()
+        assert SystemExit
+        # try:
+        #     result = mfip()
+        #     assert result is not None
+        #     assert result == "fefdefef"
+        #     assert sys.stdout == "ff"
+        #     # outcome = yield
+        #     # # outcome.excinfo may be None or a (cls, val, tb) tuple
+        #     #
+        #     # res = outcome.get_result()  # will raise if outcome was exception
+        #     #
+        #     # post_process_result(res)
+        #     #
+        #     # outcome.force_result(new_res)  # to override the return value to the plugin system
+        # except SystemExit:
+        #     pass
+    #assert result is not None
