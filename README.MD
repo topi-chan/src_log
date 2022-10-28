@@ -27,7 +27,7 @@ https://docs.python.org/3/library/venv.html
 - Run with passing log file (sample directory from PyCharm standard; container name: test_log): 
 
   To make an operation directly on a container and then copy on local (this way you're running a container only once): 
-- $ docker run -it -v /Users/username/PycharmProjects/src_log/access.log:/access.log /Users/username/PycharmProjects/src_log/result.json:/result.json test_log mfip access.log result.json
+- $ docker run -it -v /Users/username/PycharmProjects/src_log/access.log:/access.log -v /Users/username/PycharmProjects/src_log/result.json:/result.json test_log mfip access.log result.json
 
   To save on a container and then copy on local:
 
